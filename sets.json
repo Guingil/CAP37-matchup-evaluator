@@ -1,0 +1,274 @@
+{
+  "Ting-Lu": {
+    "Utility": {
+      "ability": "Vessel of Ruin",
+      "item": "Leftovers",
+      "nature": "Careful",
+      "evs": { "hp": 252, "atk": 0, "def": 4, "spa": 0, "spd": 252, "spe": 0 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Ruination", "Spikes", "Whirlwind", "Earthquake"]
+    }
+  },
+  "Corviknight": {
+    "PhysDef": {
+      "ability": "Pressure",
+      "item": "Leftovers",
+      "nature": "Impish",
+      "evs": { "hp": 252, "atk": 0, "def": 168, "spa": 0, "spd": 88, "spe": 0 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["U-turn", "Roost", "Body Press", "Defog"]
+    }
+  },
+  "Landorus-Therian": {
+    "Defensive Pivot": {
+      "ability": "Intimidate",
+      "item": "Rocky Helmet",
+      "nature": "Impish",
+      "evs": { "hp": 252, "atk": 0, "def": 240, "spa": 0, "spd": 16, "spe": 0 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Earthquake", "U-turn"]
+    }
+  },
+  "Skarmory": {
+    "PhysDef": {
+      "ability": "Sturdy",
+      "item": "Rocky Helmet",
+      "nature": "Impish",
+      "evs": { "hp": 252, "atk": 0, "def": 252, "spa": 0, "spd": 4, "spe": 0 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Body Press", "Roost", "Spikes", "Whirlwind"]
+    }
+  },
+  "Gholdengo": {
+    "Nasty Plot": {
+      "ability": "Good as Gold",
+      "item": "Air Balloon",
+      "nature": "Timid",
+      "evs": { "hp": 0, "atk": 0, "def": 4, "spa": 252, "spd": 0, "spe": 252 },
+      "ivs": { "hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Make It Rain", "Shadow Ball", "Nasty Plot", "Recover"]
+    }
+  },
+  "Dragonite": {
+    "Dragon Dance": {
+      "ability": "Multiscale",
+      "item": "Heavy-Duty Boots",
+      "nature": "Adamant",
+      "evs": { "hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Dragon Dance", "Ice Spinner", "Earthquake", "Extreme Speed"]
+    }
+  },
+  "Great Tusk": {
+    "Offensive Spinner": {
+      "ability": "Protosynthesis",
+      "item": "Leftovers",
+      "nature": "Jolly",
+      "evs": { "hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Headlong Rush", "Ice Spinner", "Knock Off", "Rapid Spin"]
+    }
+  },
+  "Zamazenta": {
+    "All-Out Attacker": {
+      "ability": "Dauntless Shield",
+      "item": "Heavy-Duty Boots",
+      "nature": "Jolly",
+      "evs": { "hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Close Combat", "Stone Edge", "Crunch", "Heavy Slam"]
+    }
+  },
+  "Kingambit": {
+    "Swords Dance": {
+      "ability": "Supreme Overlord",
+      "item": "Black Glasses",
+      "nature": "Adamant",
+      "evs": { "hp": 120, "atk": 252, "def": 0, "spa": 0, "spd": 0, "spe": 136 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Kowtow Cleave", "Iron Head", "Sucker Punch", "Swords Dance"]
+    }
+  },
+  "Darkrai": {
+    "Nasty Plot": {
+      "ability": "Bad Dreams",
+      "item": "Life Orb",
+      "nature": "Timid",
+      "evs": { "hp": 0, "atk": 0, "def": 4, "spa": 252, "spd": 0, "spe": 252 },
+      "ivs": { "hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Dark Pulse", "Focus Blast", "Sludge Bomb", "Ice Beam"]
+    }
+  },
+  "Zapdos": {
+    "OU Defensive": {
+      "ability": "Static",
+      "item": "Heavy-Duty Boots",
+      "nature": "Bold",
+      "evs": { "hp": 248, "atk": 0, "def": 168, "spa": 0, "spd": 92, "spe": 0 },
+      "ivs": { "hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Volt Switch", "Hurricane", "Roost", "Heat Wave"]
+    }
+  },
+  "Gliscor": {
+    "Utility": {
+      "ability": "Poison Heal",
+      "item": "Toxic Orb",
+      "nature": "Jolly",
+      "evs": { "hp": 244, "atk": 0, "def": 184, "spa": 0, "spd": 0, "spe": 80 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Earthquake", "Knock Off", "Toxic", "Protect"]
+    }
+  },
+  "Clefable": {
+    "PhysDef": {
+      "ability": "Magic Guard",
+      "item": "Leftovers",
+      "nature": "Bold",
+      "evs": { "hp": 252, "atk": 0, "def": 252, "spa": 0, "spd": 4, "spe": 0 },
+      "ivs": { "hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Moonblast", "Knock Off", "Soft-Boiled", "Thunder Wave"]
+    }
+  },
+"Arghonaut": {
+    "PhysDef": {
+      "ability": "Unaware",
+      "item": "Leftovers",
+      "nature": "Impish",
+      "evs": { "hp": 248, "atk": 0, "def": 224, "spa": 0, "spd": 36, "spe": 0 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Circle Throw", "Knock Off", "Spikes", "Recover"]
+    }
+  },
+  "Hemogoblin": {
+    "Offensive": {
+      "ability": "Pixilate",
+      "item": "Heavy-Duty Boots",
+      "nature": "Adamant",
+      "evs": { "hp": 40, "atk": 252, "def": 0, "spa": 0, "spd": 0, "spe": 216 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Extreme Speed", "Flare Blitz", "Taunt", "Bulk Up"]
+    }
+  },
+  "Kyurem": {
+    "Specs": {
+      "ability": "Pressure",
+      "item": "Choice Specs",
+      "nature": "Timid",
+      "evs": { "hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Ice Beam", "Freeze-Dry", "Draco Meteor", "Earth Power"]
+    }
+  },
+  "Ogerpon-Wellspring": {
+    "Offensive": {
+      "ability": "Water Absorb",
+      "item": "Wellspring Mask",
+      "nature": "Jolly",
+      "evs": { "hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Ivy Cudgel", "U-turn", "Knock Off", "Spikes"]
+    }
+  },
+  "Revenankh": {
+    "BulkySetup": {
+      "ability": "Triage",
+      "item": "Covert Cloak",
+      "nature": "Adamant",
+      "evs": { "hp": 172, "atk": 252, "def": 0, "spa": 0, "spd": 0, "spe": 84 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Drain Punch", "Poltergeist", "Bulk Up", "Moonlight"]
+    }
+  },
+  "Venomicon": {
+    "PhysDef": {
+      "ability": "Stamina",
+      "item": "Heavy-Duty Boots",
+      "nature": "Bold",
+      "evs": { "hp": 248, "atk": 0, "def": 152, "spa": 0, "spd": 108, "spe": 0 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Sludge Bomb", "Body Press", "Roost", "Stealth Rock"]
+    }
+  },
+  "Cresceidon": {
+    "Utility": {
+      "ability": "Rough Skin",
+      "item": "Heavy-Duty Boots",
+      "nature": "Timid",
+      "evs": { "hp": 252, "atk": 0, "def": 0, "spa": 4, "spd": 0, "spe": 252 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Scald", "Moonblast", "Thunder Wave", "Recover"]
+    }
+  },
+
+"Equilibra": {
+    "SpDef": {
+      "ability": "Levitate",
+      "item": "Leftovers",
+      "nature": "Calm",
+      "evs": { "hp": 252, "atk": 0, "def": 4, "spa": 0, "spd": 252, "spe": 0 },
+      "ivs": { "hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Earth Power", "Doom Desire", "Rapid Spin", "Pain Split"]
+    }
+  },
+  "Garganacl": {
+    "SpDef": {
+      "ability": "Purifying Salt",
+      "item": "Leftovers",
+      "nature": "Careful",
+      "evs": { "hp": 252, "atk": 0, "def": 52, "spa": 0, "spd": 204, "spe": 0 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Salt Cure", "Protect", "Recover", "Stealth Rock"]
+    }
+  },
+  "Mollux": {
+    "SpDef": {
+      "ability": "Dry Skin",
+      "item": "Heavy-Duty Boots",
+      "nature": "Calm",
+      "evs": { "hp": 248, "atk": 0, "def": 0, "spa": 0, "spd": 212, "spe": 48 },
+      "ivs": { "hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Lava Plume", "Clear Smog", "Recover", "Stealth Rock"]
+    }
+  },
+  "Moltres": {
+    "PhysDef": {
+      "ability": "Flame Body",
+      "item": "Heavy-Duty Boots",
+      "nature": "Bold",
+      "evs": { "hp": 248, "atk": 0, "def": 248, "spa": 0, "spd": 0, "spe": 12 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Flamethrower", "U-turn", "Roar", "Roost"]
+    }
+  },
+  "Pecharunt": {
+    "PhysDef": {
+      "ability": "Poison Puppeteer",
+      "item": "Heavy-Duty Boots",
+      "nature": "Bold",
+      "evs": { "hp": 252, "atk": 0, "def": 228, "spa": 0, "spd": 0, "spe": 28 },
+      "ivs": { "hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Malignant Chain", "Foul Play", "Recover", "Parting Shot"]
+    }
+  },
+  "Slowking-Galar": {
+    "SpDef": {
+      "ability": "Regenerator",
+      "item": "Heavy-Duty Boots",
+      "nature": "Sassy",
+      "evs": { "hp": 252, "atk": 0, "def": 4, "spa": 0, "spd": 252, "spe": 0 },
+      "ivs": { "hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 0 },
+      "moves": ["Sludge Bomb", "Future Sight", "Thunder Wave", "Chilly Reception"]
+    }
+  },
+  "Snaelstrom": {
+    "BulkySetup": {
+      "ability": "Poison Heal",
+      "item": "Toxic Orb",
+      "nature": "Careful",
+      "evs": { "hp": 252, "atk": 0, "def": 4, "spa": 0, "spd": 252, "spe": 0 },
+      "ivs": { "hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31 },
+      "moves": ["Razor Shell", "Spiky Shield", "Swords Dance", "Toxic"]
+    }
+  }
+
+}
