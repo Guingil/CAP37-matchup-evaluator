@@ -325,7 +325,7 @@ def save_index_html(fig, output_path: str):
 <body>
   <div class="page">
     <h1>Pokémon matchup buckets</h1>
-    <p> Yveltal - hp: 252, atk: 0, def: 252, spa: 0, spd: 0, spe: 4</p>
+    <p> Yveltal - impish, hp: 252, atk: 0, def: 252, spa: 0, spd: 0, spe: 4,  moves: Beak Blast, Knock Off, Taunt, Roost</p>
     <p>Hover over an icon to see the calc summary, and matchup explanation.</p>
     {plot_html}
   </div>
