@@ -7,29 +7,27 @@ import plotly.graph_objects as go
 
 
 CSV_PATH = "matchup_results.csv"
-OUTPUT_HTML = "matchup_buckets.html"
+OUTPUT_HTML = "index.html"
 
-# Give the brackets friendly names in the visualizer
 BUCKET_LABELS = {
-    "Switch-in": "A: Safe switch-ins",
-    "Switch-in BL": "B: Borderline switch-ins",
-    "Pressures": "C: Pressure targets",
-    "Checks": "D: Checks",
-    "Checks BL": "E: Borderline checks",
-    "Counters": "F: Counters us",
+    "Switch-in": "Safe switch-ins",
+    "Switch-in BL": "Borderline switch-ins",
+    "Pressures": "Pressure targets",
+    "Checks BL": "Borderline checks",
+    "Checks": "Checks",
+    "Counters": "Counters us",
 }
 
-# Force a sensible left-to-right order when present
+# BL checks goes before checks
 BUCKET_ORDER = [
     "Switch-in",
     "Switch-in BL",
     "Pressures",
-    "Checks",
     "Checks BL",
+    "Checks",
     "Counters",
 ]
 
-# Manual sprite slug fixes for names that don't normalize cleanly
 SPECIAL_CASES = {
     "Tapu Koko": "tapukoko",
     "Tapu Lele": "tapulele",
@@ -73,12 +71,6 @@ SPECIAL_CASES = {
 
 
 def load_matchups(path: str):
-    """
-    Reads the custom CSV format:
-    - CONFIG section
-    - ALL MATCHUPS section
-    - optional BUCKET COUNTS section at the bottom
-    """
     with open(path, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
@@ -101,24 +93,14 @@ def load_matchups(path: str):
 
     reader = csv.DictReader(table_lines)
     rows = [row for row in reader if row.get("Opponent")]
-
     return rows
 
 
 def extract_species_name(opponent_name: str) -> str:
-    """
-    Example:
-      'Landorus-Therian (Defensive Pivot)' -> 'Landorus-Therian'
-      'Revenankh (BulkySetup)' -> 'Revenankh'
-    """
     return opponent_name.split(" (")[0].strip()
 
 
 def sprite_slug(name: str) -> str:
-    """
-    Converts species names into Pokémon Showdown-style slugs.
-    This is good enough for most CAP + modern mons, with a manual override dict.
-    """
     if name in SPECIAL_CASES:
         return SPECIAL_CASES[name]
 
@@ -131,12 +113,9 @@ def sprite_slug(name: str) -> str:
     slug = slug.replace("♀", "-f")
     slug = slug.replace("♂", "-m")
     slug = slug.lower()
-
-    # keep hyphens that are already meaningful, but remove other punctuation
     slug = re.sub(r"[^a-z0-9\- ]+", "", slug)
     slug = slug.replace(" ", "-")
     slug = re.sub(r"-+", "-", slug).strip("-")
-
     return slug
 
 
@@ -148,9 +127,6 @@ SPRITE_BASES = [
 
 @lru_cache(maxsize=None)
 def get_sprite_url(opponent_name: str) -> str:
-    """
-    Try modern Showdown sprite folders in order.
-    """
     species = extract_species_name(opponent_name)
     slug = sprite_slug(species)
 
@@ -163,41 +139,24 @@ def get_sprite_url(opponent_name: str) -> str:
         except requests.RequestException:
             pass
 
-    # harmless placeholder if missing
     return "https://play.pokemonshowdown.com/sprites/gen5/0.png"
 
 
-def safe_float(value, default=0.0):
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return default
-
-
 def build_hover_text(row: dict) -> str:
-    opp = row.get("Opponent", "")
+    opponent_full = row.get("Opponent", "")
+    species = extract_species_name(opponent_full)
+    evs = row.get("Opp EVs", "N/A")
+    nature = row.get("Opp Nature", "N/A")
     bucket = row.get("Bucket", "")
-    we_switch = row.get("We Switch Into Them", "")
-    they_switch = row.get("They Switch Into Us", "")
-    our_move = row.get("Our Best Move", "")
-    our_min = row.get("Our Damage Min %", "")
-    our_max = row.get("Our Damage Max %", "")
-    their_move = row.get("Their Best Move", "")
-    their_min = row.get("Damage Into Us Min %", "")
-    their_max = row.get("Damage Into Us Max %", "")
-    our_speed = row.get("Our Speed", "")
-    opp_speed = row.get("Opp Speed", "")
-    summary = row.get("Summary", "")
 
     return (
-        f"<b>{opp}</b><br>"
-        f"Bracket: {BUCKET_LABELS.get(bucket, bucket)}<br>"
-        f"We switch into them: {we_switch}<br>"
-        f"They switch into us: {they_switch}<br>"
-        f"Our best move: {our_move} ({our_min}-{our_max}%)<br>"
-        f"Their best move: {their_move} ({their_min}-{their_max}%)<br>"
-        f"Speed: {our_speed} vs {opp_speed}<br><br>"
-        f"{summary}"
+        f"<b>{species}</b><br>"
+        f"Our move: {row.get('Our Best Move', '')} "
+        f"({row.get('Our Damage Min %', '')}-{row.get('Our Damage Max %', '')}%)<br>"
+        f"Their move: {row.get('Their Best Move', '')} "
+        f"({row.get('Damage Into Us Min %', '')}-{row.get('Damage Into Us Max %', '')}%)<br>"
+        f"Speed: {row.get('Our Speed', '')} vs {row.get('Opp Speed', '')}<br><br>"
+        f"{row.get('Summary', '')}"
     )
 
 
@@ -207,7 +166,6 @@ def build_plot(rows):
         if any(r["Bucket"] == bucket for r in rows):
             present_buckets.append(bucket)
 
-    # Include any unexpected buckets at the end
     for r in rows:
         if r["Bucket"] not in present_buckets:
             present_buckets.append(r["Bucket"])
@@ -221,26 +179,18 @@ def build_plot(rows):
         stack_index = counts[bucket]
         counts[bucket] += 1
 
-        x = x_map[bucket]
-        y = -stack_index
-
         points.append(
             {
-                "x": x,
-                "y": y,
+                "x": x_map[bucket],
+                "y": -stack_index,
                 "hover": build_hover_text(row),
                 "sprite": get_sprite_url(row["Opponent"]),
                 "species": extract_species_name(row["Opponent"]),
-                "bucket": bucket,
-                "our_damage_mid": (
-                    safe_float(row.get("Our Damage Min %")) + safe_float(row.get("Our Damage Max %"))
-                ) / 2.0,
             }
         )
 
     fig = go.Figure()
 
-    # Invisible markers provide hover behavior
     fig.add_trace(
         go.Scatter(
             x=[p["x"] for p in points],
@@ -253,7 +203,6 @@ def build_plot(rows):
         )
     )
 
-    # Sprites on top of the hover points
     for p in points:
         fig.add_layout_image(
             dict(
@@ -270,9 +219,20 @@ def build_plot(rows):
             )
         )
 
+        fig.add_annotation(
+            x=p["x"],
+            y=p["y"] - 0.48,
+            xref="x",
+            yref="y",
+            text=p["species"],
+            showarrow=False,
+            font=dict(size=10),
+            xanchor="center",
+            yanchor="top",
+        )
+
     max_height = max(counts.values()) if counts else 1
 
-    # Soft bracket backgrounds
     for bucket, x in x_map.items():
         fig.add_shape(
             type="rect",
@@ -286,7 +246,6 @@ def build_plot(rows):
             layer="below",
         )
 
-    # Named bracket headers
     for bucket, x in x_map.items():
         fig.add_annotation(
             x=x,
@@ -304,7 +263,6 @@ def build_plot(rows):
         tickmode="array",
         tickvals=list(x_map.values()),
         ticktext=[BUCKET_LABELS.get(b, b) for b in x_map.keys()],
-        tickfont=dict(size=12),
         range=[-0.6, len(x_map) - 0.4],
         showgrid=False,
         zeroline=False,
@@ -312,14 +270,14 @@ def build_plot(rows):
 
     fig.update_yaxes(
         visible=False,
-        range=[-max_height + 0.5, 1],
+        range=[-max_height - 0.8, 1],
         showgrid=False,
         zeroline=False,
     )
 
     fig.update_layout(
         title="Pokémon matchup buckets",
-        height=max(650, 180 + max_height * 56),
+        height=max(750, 220 + max_height * 78),
         margin=dict(l=40, r=40, t=100, b=80),
         plot_bgcolor="white",
         paper_bgcolor="white",
@@ -329,12 +287,60 @@ def build_plot(rows):
     return fig
 
 
+def save_index_html(fig, output_path: str):
+    plot_html = fig.to_html(
+        include_plotlyjs=True,
+        full_html=False,
+        config={"responsive": True},
+    )
+
+    html = f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CAP37 matchup buckets - </title>
+  <style>
+    html, body {{
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      font-family: Arial, sans-serif;
+    }}
+    .page {{
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 16px;
+    }}
+    h1 {{
+      margin: 0 0 12px 0;
+      font-size: 24px;
+    }}
+    p {{
+      margin: 0 0 16px 0;
+      color: #444;
+    }}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Pokémon matchup buckets</h1>
+    <p> Yveltal - hp: 252, atk: 0, def: 252, spa: 0, spd: 0, spe: 4</p>
+    <p>Hover over an icon to see the calc summary, and matchup explanation.</p>
+    {plot_html}
+  </div>
+</body>
+</html>
+"""
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(html)
+
+
 def main():
     rows = load_matchups(CSV_PATH)
     fig = build_plot(rows)
-    fig.write_html(OUTPUT_HTML, include_plotlyjs="cdn")
-    fig.show()
-    print(f"Saved interactive chart to {OUTPUT_HTML}")
+    save_index_html(fig, OUTPUT_HTML)
+    print(f"Saved to {OUTPUT_HTML}")
 
 
 if __name__ == "__main__":

@@ -13,13 +13,13 @@ const dex = Dex.forGen(9);
  */
 
 const OUR_MON = {
-  name: 'Mandibuzz',
+  name: 'Yveltal',
   types: ['Dark', 'Flying'],
   level: 100,
   ability: 'Overcoat',
   item: 'Heavy-Duty Boots',
   nature: 'Impish',
-  evs: { hp: 252, atk: 0, def: 252, spa: 0, spd: 0, spe: 0 },
+  evs: { hp: 252, atk: 0, def: 252, spa: 0, spd: 0, spe: 4 },
   ivs: { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 },
   moves: ['Beak Blast', 'Knock Off', 'Taunt', 'Roost'],
   teraType: undefined,
@@ -27,7 +27,7 @@ const OUR_MON = {
 
 const THRESHOLDS = {
   safeRepeatedSwitchMaxPct: 30,
-  safeSingleSwitchMaxPct: 51,
+  safeSingleSwitchMaxPct: 45,
 };
 
 const GLOBAL_FIELD = {
