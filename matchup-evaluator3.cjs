@@ -56,13 +56,13 @@ const GLOBAL_FIELD = {
 
 const OPPONENTS = [
   { species: 'Ting-Lu', setName: 'Utility' },
- { species: 'Corviknight', setName: 'PhysDef' },
+  { species: 'Corviknight', setName: 'PhysDef' },
   { species: 'Landorus-Therian', setName: 'Defensive Pivot' },
   { species: 'Skarmory', setName: 'PhysDef' },
   { species: 'Gholdengo', setName: 'Nasty Plot' },
- { species: 'Dragonite', setName: 'Dragon Dance' },
+  { species: 'Dragonite', setName: 'Dragon Dance' },
   { species: 'Great Tusk', setName: 'Offensive Spinner' },
- { species: 'Zamazenta', setName: 'All-Out Attacker' },
+  { species: 'Zamazenta', setName: 'All-Out Attacker' },
   { species: 'Kingambit', setName: 'Swords Dance' },
   { species: 'Darkrai', setName: 'Nasty Plot' },
   { species: 'Zapdos', setName: 'OU Defensive' },
@@ -75,17 +75,48 @@ const OPPONENTS = [
   { species: 'Ogerpon-Wellspring', setName: 'Offensive' },
   { species: 'Revenankh', setName: 'BulkySetup' },
   { species: 'Venomicon', setName: 'PhysDef' },
- { species: 'Cresceidon', setName: 'Utility' },
+  { species: 'Cresceidon', setName: 'Utility' },
 
   { species: 'Equilibra', setName: 'SpDef' },
   { species: 'Garganacl', setName: 'SpDef' },
   { species: 'Mollux', setName: 'SpDef' },
- { species: 'Moltres', setName: 'PhysDef' },
+  { species: 'Moltres', setName: 'PhysDef' },
   { species: 'Pecharunt', setName: 'PhysDef' },
   { species: 'Slowking-Galar', setName: 'SpDef' },
   { species: 'Snaelstrom', setName: 'BulkySetup' },
-];
 
+  { species: 'Alomomola', setName: 'PhysDef' },
+  { species: 'Dragapult', setName: 'Mixed Attacker' },
+  { species: 'Deoxys-Speed', setName: 'Mixed Attacker' },
+  { species: 'Iron Moth', setName: 'Specs' },
+  { species: 'Kitsunoh', setName: 'Utility' },
+  { species: 'Tornadus-Therian', setName: 'Nasty Plot' },
+  { species: 'Caribolt', setName: 'Swords Dance' },
+  { species: 'Ceruledge', setName: 'Swords Dance' },
+  { species: 'Chuggalong', setName: 'Setup Sweeper' },
+  { species: 'Hatterene', setName: 'PhysDef' },
+  { species: 'Heatran', setName: 'Offensive' },
+  { species: 'Hydrapple', setName: 'Nasty Plot' },
+  { species: 'Miasmaw', setName: 'Swords Dance' },
+  { species: 'Ramnarok', setName: 'Assault Vest' },
+  { species: 'Samurott-Hisui', setName: 'Offensive' },
+  { species: 'Shox', setName: 'SpDef' },
+  { species: 'Stratagem', setName: 'Power Herb' },
+  { species: 'Walking Wake', setName: 'Specs' },
+  { species: 'Weezing-Galar', setName: 'PhysDef' },
+
+  { species: 'Chromera', setName: 'Calm Mind' },
+{ species: 'Iron Crown', setName: 'Specs' },
+{ species: 'Iron Valiant', setName: 'Mixed Attacker' },
+{ species: 'Krilowatt', setName: 'Offensive' },
+{ species: 'Latios', setName: 'Calm Mind' },
+{ species: 'Malaconda', setName: 'Utility' },
+{ species: 'Naviathan', setName: 'Dragon Dance' },
+{ species: 'Ogerpon', setName: 'Offensive' },
+{ species: 'Raging Bolt', setName: 'Calm Mind' },
+{ species: 'Rillaboom', setName: 'Choice Band' },
+{ species: 'Ursaluna', setName: 'Swords Dance' },
+];
 /**
  * =========================
  * LOAD SETS
@@ -378,6 +409,8 @@ function isBurnImmune(spec) {
 
   return (
     ability === 'Poison Heal' ||
+    ability === 'Guts' ||
+    ability === 'Purifying Salt' ||
     types.includes('Fire')
   );
 }
