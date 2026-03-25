@@ -14,10 +14,10 @@ Pre: Download all files.
 
 2. I used anaconda, but you can run other things like cmd as your environment. Install @smogon/calc and @pkmn/dex first: npm install @smogon/calc @pkmn/dex in your terminal.
 
-3. Run matchup-evaluator.cjs, after having modified the species name/EVs.
+3. Run matchup-evaluator3.cjs, after having modified the species name/EVs.
 
 4. A .csv file will be the output of this, along with logs on your cmd terminal. You can check it to verify some details of your interactions.
 
-5. For visualisation, run visualiser.py after having installed the necessary libraries.
+5. For visualisation, run the visualiser (vis2.py) after having installed the necessary libraries.
 
 6. View your html file.
