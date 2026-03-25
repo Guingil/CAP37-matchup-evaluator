@@ -13,21 +13,26 @@ const dex = Dex.forGen(9);
  */
 
 const OUR_MON = {
-  name: 'Yveltal',
+  //name: 'Yveltal',
   types: ['Dark', 'Flying'],
   level: 100,
   ability: 'Overcoat',
   item: 'Heavy-Duty Boots',
-  nature: 'Impish',
-  evs: { hp: 252, atk: 0, def: 252, spa: 0, spd: 0, spe: 4 },
-  ivs: { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 },
-  moves: ['Beak Blast', 'Knock Off', 'Taunt', 'Roost'],
+  //nature: 'Impish',
+  //Simulating base 100s, 
+  name: 'Moltres Galar',
+  nature: 'Jolly',
+  evs: { hp: 164, atk: 600, def: 164, spa: 0, spd: 0, spe: 72 },
+  //evs: { hp: 252, atk: 252, def: 252, spa: 0, spd: 0, spe: 4 },
+  ivs: { hp: 31, atk: 31, def: 31, spa: 31, spd: 2, spe: 31 },
+  moves: ['Beak Blast', 'Crunch', 'Taunt'],
+
   teraType: undefined,
 };
 
 const THRESHOLDS = {
-  safeRepeatedSwitchMaxPct: 30,
-  safeSingleSwitchMaxPct: 45,
+  safeRepeatedSwitchMaxPct: 33,
+  safeSingleSwitchMaxPct: 50,
 };
 
 const GLOBAL_FIELD = {
@@ -680,6 +685,10 @@ function isDefensiveRole(oppSpec, recoveryProfile, statusProfile, pivotProfile) 
   );
 }
 
+function isKnockOffBlocked(oppSpec) {
+  return oppSpec.ability === 'Magic Guard' || oppSpec.ability === 'Sticky Hold';
+}
+
 function applyKnockLogic(
   weIntoThem,
   theyIntoUs,
@@ -690,7 +699,14 @@ function applyKnockLogic(
   statusProfile,
   pivotProfile
 ) {
+  // Only apply Knock Off logic if our mon actually has Knock Off.
   if (!hasKnock(ourSpec)) {
+    return { weIntoThem, theyIntoUs, reasons };
+  }
+
+  // Do not apply Knock Off logic into abilities that invalidate the value.
+  if (isKnockOffBlocked(oppSpec)) {
+    reasons.push('Knock Off logic skipped due to Magic Guard or Sticky Hold');
     return { weIntoThem, theyIntoUs, reasons };
   }
 
@@ -702,11 +718,43 @@ function applyKnockLogic(
     reasons.push('Knock Off strongly pressures item-reliant defensive sets');
     theyIntoUs = worsenSwitchState(theyIntoUs);
   } else {
-    reasons.push('Knock Off provides useful long-term pressure');
+    reasons.push('Knock Off is not that essential');
   }
 
   return { weIntoThem, theyIntoUs, reasons };
 }
+
+function applySpeedOHKOCheckBLLogic(
+  weIntoThem,
+  theyIntoUs,
+  reasons,
+  taken,
+  ourSpec,
+  oppSpec
+) {
+  if (!taken) return { weIntoThem, theyIntoUs, reasons };
+
+  const ourSpeed = speedOf(ourSpec);
+  const oppSpeed = speedOf(oppSpec);
+
+  const theyAreFaster = oppSpeed > ourSpeed;
+  const theyOHKOUs = taken.minPct >= 100;
+
+  // Only convert true Pressure cases into Checks BL.
+  if (
+    weIntoThem === 'No' &&
+    theyIntoUs === 'No' &&
+    theyAreFaster &&
+    theyOHKOUs
+  ) {
+    theyIntoUs = 'Soft';
+    reasons.push('faster OHKO threat downgrades Pressure to Checks BL');
+  }
+
+  return { weIntoThem, theyIntoUs, reasons };
+}
+
+
 
 function getPunishableContactProfile(oppSpec, ourSpec, thresholdRatio = 0.5) {
   const moves = oppSpec.moves || [];
@@ -876,9 +924,10 @@ function getTheirSwitchInState(
   }
 
   const strongKnock =
-    hasKnock(ourSpec) &&
-    HIGH_VALUE_KNOCK_ITEMS.has(oppSpec.item) &&
-    isDefensiveRole(oppSpec, recoveryProfile, statusProfile, pivotProfile);
+  hasKnock(ourSpec) &&
+  !isKnockOffBlocked(oppSpec) &&
+  HIGH_VALUE_KNOCK_ITEMS.has(oppSpec.item) &&
+  isDefensiveRole(oppSpec, recoveryProfile, statusProfile, pivotProfile);
 
   if (state === 'Safe' && strongKnock) {
     state = 'Soft';
@@ -890,6 +939,7 @@ function getTheirSwitchInState(
   }
 
   return state;
+
 }
 
 /**
@@ -1037,8 +1087,24 @@ function scoreMatchup(ourSpec, oppEntry) {
     recoveryProfile,
     statusProfile,
     pivotProfile
-  ));
+  )) 
+  ;
   debug.push(`After knock logic: weIntoThem=${weIntoThem}, theyIntoUs=${theyIntoUs}`);
+
+  
+  ({
+    weIntoThem,
+    theyIntoUs,
+    reasons
+  } = applySpeedOHKOCheckBLLogic(
+    weIntoThem,
+    theyIntoUs,
+    reasons,
+    taken,
+    ourSpec,
+    oppSpec
+  ));
+  debug.push(`After speed/OHKO logic: weIntoThem=${weIntoThem}, theyIntoUs=${theyIntoUs}`);
 
   const bucket = deriveBucket(weIntoThem, theyIntoUs);
   debug.push(`Derived bucket from adjusted axes: ${bucket}`);
